@@ -1,0 +1,40 @@
+body{
+    text-align: center;
+    margin: 0;
+    background-color: #222831;
+    color: #393E46;
+}
+.txt-top{
+    margin-top: 1%;
+    background-color:  #EEEEEE;
+}
+.text{
+    line-height: 6rem;
+}
+
+.button-top{
+    margin-top: 2%; 
+}
+.buttons-game{
+    margin-top: 2%;
+}
+.btn-body{
+    width: 10rem;
+    height: 8rem;
+    margin: 1%;
+    border: none;
+}
+.btn-body:focus,.btn-body:hover{
+    border :none;
+    box-shadow:none;
+}
+
+.btn-selected,.btn-selected:focus{
+    border: solid;
+    border-color: white;
+    box-shadow: 0px 1px 6px 3px white;
+}
+
+.index , .Correct,.xx{
+    display: none;
+}
