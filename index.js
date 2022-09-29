@@ -7,13 +7,21 @@ var btnMemory = [];
 var index = 0;
 var correctNumber; //1
 var timePressed = 0;
+var restartMode = false;
 $(".button-top .btn").on("click",function(){
-    if (!isGameStarted){
+    if (!isGameStarted && !restartMode){
         isGameStarted = true;
         $(".button-top .btn").addClass("disabled");
         $(".txt-info .text").text("The Game Started Your Level is "+level);
         pickBtn();
         $(".buttons-game .btn").on("click",playerPicks);
+        $(".pressTimes").text("You Press Times "+ timePressed);
+    }else if(!isGameStarted && restartMode){
+        restartMode = false;
+        isGameStarted = true;
+        $(".button-top .btn").addClass("disabled");
+        $(".txt-info .text").text("The Game Started Your Level is "+level);
+        pickBtn();
         $(".pressTimes").text("You Press Times "+ timePressed);
     }
 });
@@ -24,15 +32,15 @@ function playerPicks(){
             audio.play();
             var trueSelection = false;
             $(".Correct").text("correctNumber = "+correctNumber);
-            $(".index").text("correctNumber = "+index);
+            $(".index").text("index = "+index + " arr =  " + btnMemory + " len " + btnMemory.length);
             switch(correctNumber){
-                case 1 : if ($(".f").is(this)){trueSelection = true;}
+                case 1 : console.log($(".f").is(this)); if ($(".f").is(this)){trueSelection = true;}
                 break;
-                case 2: if ($(".s").is(this) ){trueSelection = true;}
+                case 2: console.log($(".s").is(this)); if ($(".s").is(this) ){trueSelection = true;}
                 break;
-                case 3: if ($(".t").is(this) ){trueSelection = true; }
+                case 3: console.log($(".t").is(this)); if ($(".t").is(this) ){trueSelection = true; }
                 break;
-                case 4: if ($(".l").is(this)){trueSelection = true; }
+                case 4: console.log($(".l").is(this)); if ($(".l").is(this)){trueSelection = true; }
                 break;
                 default: $(".txt-info .text").text("Error , try refresh the page");
             }
@@ -41,7 +49,7 @@ function playerPicks(){
                     index++;
                     correctNumber = btnMemory[index];
                     $(".Correct").text("correctNumber = "+correctNumber);
-                    $(".index").text("correctNumber = "+index);
+                    $(".index").text("index = "+index + " arr =  " + btnMemory + " len " + btnMemory.length);
                     timePressed++;
                     $(".pressTimes").text("You Press Times "+ timePressed);
                 }else{
@@ -54,7 +62,6 @@ function playerPicks(){
             }else{
                 $(".txt-info .text").text("You Picked The Wrong Number Fool , try Again"); 
                 isGameStarted = false;
-                isGameStarted = false;
                 btnSelectViewTime = 2000;
                 subtractValue = 150;
                 btnSelectTimer = null;
@@ -64,6 +71,7 @@ function playerPicks(){
                 timePressed = 0;
                 $(".pressTimes").text("Times you press");
                 $(".button-top .btn").removeClass("disabled");
+                restartMode = true;
             }
         }
     }
@@ -87,7 +95,6 @@ function pickBtn(){
 }
 
 function animSelect(btn){
-    console.log(btn);
     btn.addClass("btn-selected");
     btnSelectTimer = setTimeout(function(){
         btn.removeClass("btn-selected");
@@ -98,7 +105,7 @@ function animSelect(btn){
         index = 0;
         correctNumber = btnMemory[index];
         $(".Correct").text("correctNumber = "+correctNumber);
-        $(".index").text("correctNumber = "+index);
+        $(".index").text("index = "+index + " arr =  " + btnMemory + " len " + btnMemory.length);
     },btnSelectViewTime);
     $(".txt-info .text").text("Your Level Now is "+level);
     if(btnSelectViewTime < 1000){
