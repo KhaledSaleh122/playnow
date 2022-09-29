@@ -36,5 +36,5 @@ body{
 }
 
 .index , .Correct,.xx{
-    /*display: none;*/
+    display: none;
 }
